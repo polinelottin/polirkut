@@ -25,12 +25,15 @@ const ProfileRelations = ({ title, items }) => {
         {`${title} (${items.length})`}
       </h2>
       <ul>
-        {items.map(({id, title, image}, index) => {
+        {items.map(({id, title, image, url}, index) => {
           if(index < MAX_TO_HOW) {
             return (
               <li key={id}>
-                <a href={`users/${title}`}>
-                  <img style={{ borderRadius: '8px' }} src={`https://github.com/${image}.png`}/>
+                <a href={url ? url : ''}>
+                  <img
+                    style={{ borderRadius: '8px' }}
+                    src={image ? image : 'https://github.com/30x30.png'}
+                  />
                   <span>{title}</span>
                 </a>
               </li>
@@ -47,7 +50,6 @@ export default function Home() {
   const [comunidades, setComunidades] = React.useState([{
     id: 'asdasdasd',
     title: 'Alurakut',
-    image: '30x30',
   }]);
 
   const gitHubUser = 'polinelottin';
@@ -61,7 +63,7 @@ export default function Home() {
   ].map(user => ({
     id: user,
     title: user,
-    image: user,
+    image: `https://github.com/${user}.png`,
   }));
 
   const handleCreateComunidade = (event) => {
@@ -71,7 +73,6 @@ export default function Home() {
     const comunidade = {
       id: new Date().toISOString(),
       title: formData.get('title'),
-      image: formData.get('url'),
     }
 
     setComunidades([
