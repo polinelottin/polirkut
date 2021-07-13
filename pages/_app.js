@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: #D9E6F6;
+    background-image: url('https://coolwallpapers.me/picsup/2950099-hokusai-landscape-japan-wood-block___mixed-wallpapers.jpg');
     font-family: sans-serif;
   }
 
