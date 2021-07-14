@@ -56,8 +56,8 @@ ProfileRelations.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    url: PropTypes.string,
   })).isRequired,
 };
 
