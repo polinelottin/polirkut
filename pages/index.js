@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
 import Box from '../src/components/Box'
 import MainGrid from '../src/components/MainGrid'
@@ -15,6 +16,10 @@ const ProfileSidebar = ({ user }) => (
     <AlurakutProfileSidebarMenuDefault />
   </Box>
 );
+
+ProfileSidebar.propTypes = {
+  user: PropTypes.string.isRequired,
+};
 
 const ProfileRelations = ({ title, items }) => {
   const MAX_TO_HOW = 6;
@@ -45,6 +50,17 @@ const ProfileRelations = ({ title, items }) => {
     </ProfileRelationsBoxWrapper>
   );
 };
+
+ProfileRelations.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })).isRequired,
+};
+
 
 export default function Home() {
   const [comunidades, setComunidades] = React.useState([{
