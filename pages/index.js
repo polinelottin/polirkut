@@ -109,7 +109,7 @@ export default function Home() {
           <h1 className="title">
             Bem vinda
           </h1>
-          <OrkutNostalgicIconSet />
+          <OrkutNostalgicIconSet confiavel={3} legal={3} sexy={3} />
         </Box>
         <Box>
           <h2 className="subTitle">
