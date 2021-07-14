@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
+import { request } from "../src/lib/datocms";
 import Box from '../src/components/Box'
 import MainGrid from '../src/components/MainGrid'
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
@@ -63,14 +64,36 @@ ProfileRelations.propTypes = {
   })).isRequired,
 };
 
+const COMMUNITIES_QUERY = `{
+    allCommunities {
+      id
+      title
+      _status
+      _firstPublishedAt
+      imageUrl
+    }
+    _allCommunitiesMeta(filter: {}) {
+      count
+    }
+  }
+`;
 
-export default function Home() {
+export async function getStaticProps() {
+    const data = await request({
+        query: COMMUNITIES_QUERY,
+        variables: { limit: 6 }
+    });
+    const communities = data.allCommunities.map(community => ({
+        id: community.id,
+        title: community.title,
+        image: community.imageUrl,
+    }))
+    return { props: { communities }};
+}
+
+export default function Home({ communities }) {
     const gitHubUser = 'polinelottin';
-
-    const [comunidades, setComunidades] = React.useState([{
-        id: 'asdasdasd',
-        title: 'Alurakut',
-    }]);
+    const [comunidades, setComunidades] = React.useState(communities);
     const [seguidores, setSeguidores] = React.useState([]);
 
     React.useEffect(() => {
@@ -170,3 +193,11 @@ export default function Home() {
         </>
     )
 }
+
+Home.propTypes = {
+    communities: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+    })).isRequired,
+};
