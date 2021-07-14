@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { AlurakutStyles } from '../src/lib/AlurakutCommons';
 
@@ -37,7 +39,7 @@ const theme = {
   },
 }
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <GlobalStyle />
@@ -47,3 +49,10 @@ export default function App({ Component, pageProps }) {
     </>
   )
 }
+
+App.propTypes = {
+  Component: PropTypes.any.isRequired,
+  pageProps: PropTypes.any.isRequired,
+};
+
+export default App;
