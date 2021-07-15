@@ -1,7 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Box from '../Box';
 
-export const ProfileRelationsBoxWrapper = styled(Box)`
+const ProfileRelationsBoxWrapper = styled(Box)`
   ul {
     display: grid;
     grid-gap: 8px;
@@ -50,3 +52,45 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     }
   }
 `; 
+
+export const ProfileRelations = ({ title, items }) => {
+    const MAX_TO_HOW = 6;
+
+    return (
+        <ProfileRelationsBoxWrapper>
+        <h2 className="smallTitle">
+            {`${title} (${items.length})`}
+        </h2>
+        <ul>
+            {items.map(({id, title, image, url}, index) => {
+                if(index < MAX_TO_HOW) {
+                    return (
+                        <li key={id}>
+                            <a href={url ? url : ''}>
+                            <img
+                                style={{ borderRadius: '8px' }}
+                                src={image ? image : 'https://github.com/30x30.png'}
+                            />
+                            <span>{title}</span>
+                            </a>
+                        </li>
+                    );
+                }
+            })
+            }
+        </ul>
+        </ProfileRelationsBoxWrapper>
+    );
+};
+
+ProfileRelations.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([
+        PropTypes.string, PropTypes.number,
+    ]).isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    url: PropTypes.string,
+  })).isRequired,
+};
