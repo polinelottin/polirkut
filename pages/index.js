@@ -67,12 +67,12 @@ export default function Home() {
 
     const handleCreateComunidade = (event) => {
         event.preventDefault();
-
         const formData = new FormData(event.target);
+
         const comunidade = {
-            id: new Date().toISOString(),
             title: formData.get('title'),
-        }
+            imageUrl: formData.get('url'),
+        };
 
         fetch('api/comunidades', {
             method: 'POST',
@@ -120,15 +120,15 @@ export default function Home() {
                 <form onSubmit={event => handleCreateComunidade(event)} >
                     <div>
                     <input
-                        placeholder="Qual vai ser o nome da sua comunidade?"
                         name="title"
+                        placeholder="Qual vai ser o nome da sua comunidade?"
                         aria-label="Qual vai ser o nome da sua comunidade?"
                     />
                     </div>
                     <div>
                     <input
-                        placeholder="Coloque uma URL para usarmos de capa"
                         name="url"
+                        placeholder="Coloque uma URL para usarmos de capa"
                         aria-label="Coloque uma URL para usarmos de capa"
                     />
                     </div>

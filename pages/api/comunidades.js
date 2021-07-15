@@ -1,6 +1,6 @@
 import { SiteClient } from 'datocms-client';
 
-export default async function request(request, response) {
+export default async function makeRequest(request, response) {
     const client = new SiteClient(process.env.NEXT_DATOCMS_API_TOKEN);
 
     if(request.method === 'GET') {
@@ -12,6 +12,17 @@ export default async function request(request, response) {
     
         response.status = 200;
         response.json(items);
+        return;
+    }
+
+    if(request.method === 'POST') {
+        const community = await client.items.create({
+            itemType: '967623',
+            ...request.body,
+        });
+    
+        response.status = 200;
+        response.json(community);
         return;
     }
     
