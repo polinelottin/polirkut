@@ -65,19 +65,6 @@ export default function Home() {
         });
     }, []);
 
-    const favPeople = [
-        'juunegreiros',
-        'omariosouto',
-        'peas',
-        'rafaballerini',
-        'marcobrunodev',
-        'natanaelblemos',
-    ].map(user => ({
-        id: user,
-        title: user,
-        image: `https://github.com/${user}.png`,
-    }));
-
     const handleCreateComunidade = (event) => {
         event.preventDefault();
 
@@ -146,7 +133,7 @@ export default function Home() {
                     />
                     </div>
                     <button>
-                    Criar comunidade
+                        Criar comunidade
                     </button>
 
                 </form>
@@ -155,7 +142,6 @@ export default function Home() {
             <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
                 <ProfileRelations title="Seguidores" items={seguidores} />
                 <ProfileRelations title="Comunidades" items={comunidades} />
-                <ProfileRelations title="Pessoas da comunidade" items={favPeople} />
             </div>
             </MainGrid>
         </>
